@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.705
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tetris Monogame", "Tetris Monogame\Tetris Monogame.csproj", "{7A7094E9-E686-414F-BD80-42913F2628F5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7A7094E9-E686-414F-BD80-42913F2628F5}.Debug|x86.ActiveCfg = Debug|x86
+		{7A7094E9-E686-414F-BD80-42913F2628F5}.Debug|x86.Build.0 = Debug|x86
+		{7A7094E9-E686-414F-BD80-42913F2628F5}.Release|x86.ActiveCfg = Release|x86
+		{7A7094E9-E686-414F-BD80-42913F2628F5}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BE03073E-D527-48CE-8078-3F60DF81AA4F}
+	EndGlobalSection
+EndGlobal
