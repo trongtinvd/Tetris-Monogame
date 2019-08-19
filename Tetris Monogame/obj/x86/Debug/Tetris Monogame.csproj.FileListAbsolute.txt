@@ -1,0 +1,27 @@
+G:\Tài liệu\c#\Tetris Monogame\Tetris Monogame\bin\Windows\x86\Debug\Tetris Monogame.exe
+G:\Tài liệu\c#\Tetris Monogame\Tetris Monogame\bin\Windows\x86\Debug\Tetris Monogame.pdb
+G:\Tài liệu\c#\Tetris Monogame\Tetris Monogame\bin\Windows\x86\Debug\MonoGame.Framework.dll
+G:\Tài liệu\c#\Tetris Monogame\Tetris Monogame\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+G:\Tài liệu\c#\Tetris Monogame\Tetris Monogame\bin\Windows\x86\Debug\SharpDX.dll
+G:\Tài liệu\c#\Tetris Monogame\Tetris Monogame\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+G:\Tài liệu\c#\Tetris Monogame\Tetris Monogame\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+G:\Tài liệu\c#\Tetris Monogame\Tetris Monogame\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+G:\Tài liệu\c#\Tetris Monogame\Tetris Monogame\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+G:\Tài liệu\c#\Tetris Monogame\Tetris Monogame\bin\Windows\x86\Debug\SharpDX.XInput.dll
+G:\Tài liệu\c#\Tetris Monogame\Tetris Monogame\bin\Windows\x86\Debug\MonoGame.Framework.xml
+G:\Tài liệu\c#\Tetris Monogame\Tetris Monogame\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+G:\Tài liệu\c#\Tetris Monogame\Tetris Monogame\bin\Windows\x86\Debug\SharpDX.xml
+G:\Tài liệu\c#\Tetris Monogame\Tetris Monogame\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+G:\Tài liệu\c#\Tetris Monogame\Tetris Monogame\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+G:\Tài liệu\c#\Tetris Monogame\Tetris Monogame\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+G:\Tài liệu\c#\Tetris Monogame\Tetris Monogame\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+G:\Tài liệu\c#\Tetris Monogame\Tetris Monogame\bin\Windows\x86\Debug\SharpDX.XInput.xml
+G:\Tài liệu\c#\Tetris Monogame\Tetris Monogame\obj\x86\Debug\Tetris Monogame.csprojAssemblyReference.cache
+G:\Tài liệu\c#\Tetris Monogame\Tetris Monogame\obj\x86\Debug\Tetris Monogame.csproj.CoreCompileInputs.cache
+G:\Tài liệu\c#\Tetris Monogame\Tetris Monogame\obj\x86\Debug\Tetris Monogame.csproj.CopyComplete
+G:\Tài liệu\c#\Tetris Monogame\Tetris Monogame\obj\x86\Debug\Tetris Monogame.exe
+G:\Tài liệu\c#\Tetris Monogame\Tetris Monogame\obj\x86\Debug\Tetris Monogame.pdb
+G:\Tài liệu\c#\Tetris Monogame\Tetris Monogame\bin\Windows\x86\Debug\Content\ArialFont.xnb
+G:\Tài liệu\c#\Tetris Monogame\Tetris Monogame\bin\Windows\x86\Debug\Content\Field.xnb
+G:\Tài liệu\c#\Tetris Monogame\Tetris Monogame\bin\Windows\x86\Debug\Content\AnnounceBox.xnb
+G:\Tài liệu\c#\Tetris Monogame\Tetris Monogame\bin\Windows\x86\Debug\Content\Blocks.xnb
