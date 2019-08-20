@@ -34,14 +34,23 @@ namespace Tetris_Monogame
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             game = new TetrisGame();
-            game.WindowHeight = windowHeight;
-            game.WindowWidth = windowWidth;
-            game.Field.Texture = Content.Load<Texture2D>("Field");
-            //game.Blocks.Texture = Content.Load<Texture2D>("Blocks");
-            game.AnnounceBox.Texture = Content.Load<Texture2D>("AnnounceBox");
-            game.Font.Texture = Content.Load<SpriteFont>("ArialFont");
+            //game.WindowHeight = windowHeight;
+            //game.WindowWidth = windowWidth;
+            //game.Field.Texture = Content.Load<Texture2D>("Field");
+            //game.BlocksGenerator.Texture = Content.Load<Texture2D>("Blocks");
+            //game.AnnounceBox.Texture = Content.Load<Texture2D>("AnnounceBox");
+            //game.Font.Texture = Content.Load<SpriteFont>("ArialFont");
 
-            game.InitializeNewGame();
+            //game.WindowManager.WindowHeight = windowHeight;
+            //game.WindowManager.WindowWidth = windowWidth;
+
+            game.WindowManager.Window = new Rectangle(0, 0, windowWidth, windowHeight);
+            game.TextureManager.Field.Texture = Content.Load<Texture2D>("Field");
+            game.TextureManager.AnnouncementBox.Texture = Content.Load < Texture2D>("AnnounceBox");
+            game.TextureManager.Block.Texture = Content.Load<Texture2D>("Blocks");
+            game.TextureManager.Font.SpriteFont = Content.Load<SpriteFont>("ArialFont");
+
+            game.InitializeWindow();
         }
         
         protected override void UnloadContent()
@@ -62,8 +71,10 @@ namespace Tetris_Monogame
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.White);
-            
+
+            spriteBatch.Begin();
             game.Draw(spriteBatch);
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }

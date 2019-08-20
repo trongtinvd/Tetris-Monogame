@@ -42,11 +42,25 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AnnouncementBox.cs" />
+    <Compile Include="Block.cs" />
+    <Compile Include="BlockCollection.cs" />
+    <Compile Include="BlockColor.cs" />
+    <Compile Include="BlocksShape.cs" />
+    <Compile Include="FallingBlockI.cs" />
+    <Compile Include="FallingBlockJ.cs" />
+    <Compile Include="FallingBlockL.cs" />
+    <Compile Include="FallingBlockO.cs" />
+    <Compile Include="FallingBlock.cs" />
+    <Compile Include="FallingBlockS.cs" />
+    <Compile Include="FallingBlockT.cs" />
+    <Compile Include="FallingBlockZ.cs" />
     <Compile Include="FieldTexture.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="KeyBoardController.cs" />
+    <Compile Include="MergeBlocks.cs" />
     <Compile Include="MyFont.cs" />
     <Compile Include="MyTexture.cs" />
+    <Compile Include="Point.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TetrisGame.cs" />
