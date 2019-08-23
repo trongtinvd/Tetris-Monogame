@@ -11,52 +11,31 @@ namespace Tetris_Monogame
 {
     class TetrisGame
     {
-        //public int WindowHeight { get; set; }
-        //public int WindowWidth { get; set; }
-        //public int GameSpeed { get; set; }
-        //public bool Started { get; set; }
-
+        public SpriteBatch SpriteBatch { get; set; }
         public TextureManager TextureManager { get; set; }
         public WindowManager WindowManager { get; set; }
         public GameplayManager GameplayManager { get; set; }
-        public KeyboardManager KeyboardManager { get; set; }
 
-
-        //public FieldTexture Field { get; set; }
-        //public AnnouncementBox AnnounceBox { get; set; }
-        //public MyFont Font { get; set; }
-
-        private FallingBlock fallingBlock;
+        private FallingBlockWithShape fallingBlock;
         private MergeBlocks mergeBlock;
 
 
 
         public TetrisGame()
         {
-            //WindowHeight = 0;
-            //WindowWidth = 0;
-            //Started = false;
-            //Field = new FieldTexture();
-            //AnnounceBox = new AnnouncementBox();
-            //Font = new MyFont();
+            TextureManager = new TextureManager();
+            WindowManager = new WindowManager();
+            GameplayManager = new GameplayManager();
+
+
+            fallingBlock = new FallingBlockWithShape(new Point(), BlockColor.Black);
+            mergeBlock = new MergeBlocks();
         }
 
         internal void InitializeNewGame()
         {
-            fallingBlock = new FallingBlock(BlocksShape.Random);
-            //mergeBlocks = new MergeBlocks();
-        }
-
-        internal void InitializeWindow()
-        {
-            //Field.DestinationRectangle = new Rectangle(0, 0, WindowWidth, WindowHeight);
-            //Field.SourceRectangle = new Rectangle(142, 81, 521 - 142, 542 - 81);
-            //Field.Color = Color.White;
-
-            //AnnounceBox.DestinationRectangle = new Rectangle(0, 200, WindowWidth, 50);
-            //AnnounceBox.Color = Color.White;
-
-            //Font.Color = Color.Black;
+            fallingBlock = FallingBlockGenerator.Generate(BlocksShape.Random, new Point(10,5));
+            mergeBlock = new MergeBlocks();
         }
 
         public void Update(KeyboardState keyboardState)
@@ -79,17 +58,21 @@ namespace Tetris_Monogame
                 //        }
                 //    }
 
-                if(keyboardState.IsKeyDown(Keys.Left)&&fallingBlock.LeftMostBlock.Location.X!=0)
+                if (keyboardState.IsKeyDown(Keys.Left) && fallingBlock.LeftMostBlock.Location.X > 0)
                 {
                     fallingBlock.MoveLeft();
                 }
-                else if (keyboardState.IsKeyDown(Keys.Right)&& fallingBlock.RightMostBlock.Location.X!=9)
+                else if (keyboardState.IsKeyDown(Keys.Right) && fallingBlock.RightMostBlock.Location.X < 19)
                 {
                     fallingBlock.MoveRight();
                 }
-                else if(keyboardState.IsKeyDown(Keys.Up))
+                else if (keyboardState.IsKeyDown(Keys.Up))
                 {
-                    fallingBlock.Rotate90DegreeClockwire();
+                    fallingBlock.Transform();
+                }
+                else if (keyboardState.IsKeyDown(Keys.Space))
+                {
+                    this.GameplayManager.GameStarted = false;
                 }
 
                 fallingBlock.MoveDown(this.GameplayManager.GameSpeed);
@@ -104,28 +87,44 @@ namespace Tetris_Monogame
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw()
         {
-
-            spriteBatch.Draw(this.TextureManager.Field.Texture, this.WindowManager.EntireWindow, this.TextureManager.Field.Source, Color.White);
-
-            foreach(Block block in fallingBlock.List)
-            {
-                spriteBatch.Draw(this.TextureManager.GetTexture(block), this.WindowManager.GetBlockDestination(block), Color.White);
-            }
-            //foreach (Block block in mergeBlock.List)
-            //{
-            //  spriteBatch.Draw(this.TextureManager.GetTexture(block), this.WindowManager.GetBlockDestination(block), Color.White);
-            //}
+            DrawField();
+            DrawFallingBlock();
+            DrawMergeBlock();
 
             if (this.GameplayManager.GameStarted == false)
             {
-                //spriteBatch.Draw(AnnounceBox.Texture, AnnounceBox.DestinationRectangle, AnnounceBox.Color);
-                //spriteBatch.DrawString(Font.Texture, "Press enter", new Vector2(Font.HorizontalPosition("Press enter", WindowWidth, HorizontalAlign.Center), 250), Font.Color);
-                spriteBatch.Draw(this.TextureManager.AnnounceBox.Texture, this.WindowManager.GetAnnounceBoxDestination(), Color.White);
-                spriteBatch.DrawString(this.TextureManager.Font.SpriteFont, "Press enter", this.WindowManager.GetMessageDestination("Press enter"), Color.Black);
+                DrawAnnounce();
             }
-            
+
+        }
+
+        private void DrawField()
+        {
+            SpriteBatch.Draw(this.TextureManager.Field.Texture, this.WindowManager.EntireWindow(), this.TextureManager.Field.Source, Color.White);
+        }
+
+        private void DrawFallingBlock( )
+        {
+            foreach (Block block in fallingBlock.List)
+            {
+                SpriteBatch.Draw(this.TextureManager.Block.Texture, this.WindowManager.Destination(block), this.TextureManager.Block.Source(block), Color.White);
+            }
+        }
+
+        private void DrawMergeBlock( )
+        {
+            foreach (Block block in mergeBlock.List)
+            {
+                SpriteBatch.Draw(this.TextureManager.Block.Texture, this.WindowManager.Destination(block), this.TextureManager.Block.Source(block), Color.White);
+            }
+        }
+
+        private void DrawAnnounce( )
+        {
+            SpriteBatch.Draw(this.TextureManager.AnnounceBox.Texture, this.WindowManager.AnnouncementBoxDestination(), Color.White);
+            SpriteBatch.DrawString(this.TextureManager.Font.SpriteFont, "Press enter", this.WindowManager.Destination("Press enter", this.TextureManager.Font, HorizontalAlign.Center), Color.Black);
         }
     }
 }

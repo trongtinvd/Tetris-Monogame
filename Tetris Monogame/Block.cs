@@ -8,21 +8,24 @@ namespace Tetris_Monogame
 {
     class Block
     {
-        //public int Row { get; set; }
-        //public int Column { get; set; }
         public Point Location { get; set; }
         public BlockColor Color { get; set; }
 
         public Block()
         {
             Location = new Point();
-            Color = BlockColor.White;
+            Color = BlockColor.Black;
         }
 
-        public Block(int row, int column)
+        public Block(Point location)
         {
-            Location = new Point(row, column);
-            Color = BlockColor.White;
+            Location = location;
+            Color = BlockColor.Black;
+        }
+        public Block(Point location, BlockColor color)
+        {
+            Location = location;
+            Color = color;
         }
     }
 }

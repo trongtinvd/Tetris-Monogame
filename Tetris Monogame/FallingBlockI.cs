@@ -6,15 +6,30 @@ using System.Threading.Tasks;
 
 namespace Tetris_Monogame
 {
-    class FallingBlockI: FallingBlock
+    class FallingBlockI : FallingBlockWithShape
     {
-        public FallingBlockI()
+        public FallingBlockI(Point origin, BlockColor color) : base(origin, color)
         {
-                List.Add(new Block(1, 0));
-                List.Add(new Block(0, 0));
-                List.Add(new Block(-1, 0));
-                List.Add(new Block(-2, 0));
 
+        }
+
+        protected override void MakeDefaultShapes()
+        {
+            shapes = new int[2, 4, 4]
+            {
+                {
+                    {0,1,0,0},
+                    {0,1,0,0},
+                    {0,1,0,0},
+                    {0,1,0,0}
+                },
+                {
+                    {0,0,0,0},
+                    {1,1,1,1},
+                    {0,0,0,0},
+                    {0,0,0,0}
+                }
+            };
         }
     }
 }
