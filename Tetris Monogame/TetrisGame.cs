@@ -16,7 +16,7 @@ namespace Tetris_Monogame
         public WindowManager WindowManager { get; set; }
         public GameplayManager GameplayManager { get; set; }
 
-        private FallingBlockWithShape fallingBlock;
+        private FallingBlock fallingBlock;
         private MergeBlocks mergeBlock;
 
 
@@ -28,13 +28,14 @@ namespace Tetris_Monogame
             GameplayManager = new GameplayManager();
 
 
-            fallingBlock = new FallingBlockWithShape(new Point(), BlockColor.Black);
+            //fallingBlock = new FallingBlockWithShape(new Point(), BlockColor.Black);
+            fallingBlock = new FallingBlock();
             mergeBlock = new MergeBlocks();
         }
 
         internal void InitializeNewGame()
         {
-            fallingBlock = FallingBlockGenerator.Generate(BlocksShape.Random, new Point(10,5));
+            fallingBlock = FallingBlockGenerator.Generate(BlocksShape.Random, new Point(8,0));
             mergeBlock = new MergeBlocks();
         }
 
@@ -58,13 +59,13 @@ namespace Tetris_Monogame
                 //        }
                 //    }
 
-                if (keyboardState.IsKeyDown(Keys.Left) && fallingBlock.LeftMostBlock.Location.X > 0)
+                if (keyboardState.IsKeyDown(Keys.Left))
                 {
-                    fallingBlock.MoveLeft();
+                    fallingBlock.MoveLeft(1);
                 }
-                else if (keyboardState.IsKeyDown(Keys.Right) && fallingBlock.RightMostBlock.Location.X < 19)
+                else if (keyboardState.IsKeyDown(Keys.Right))
                 {
-                    fallingBlock.MoveRight();
+                    fallingBlock.MoveRight(1);
                 }
                 else if (keyboardState.IsKeyDown(Keys.Up))
                 {
@@ -75,6 +76,7 @@ namespace Tetris_Monogame
                     this.GameplayManager.GameStarted = false;
                 }
 
+                fallingBlock.Adjust(0, WindowManager.Column);
                 fallingBlock.MoveDown(this.GameplayManager.GameSpeed);
             }
             else

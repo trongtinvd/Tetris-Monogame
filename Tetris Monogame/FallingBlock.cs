@@ -8,29 +8,78 @@ namespace Tetris_Monogame
 {
     class FallingBlock : BlockCollection
     {
+        protected int[,,] shapes;
+        protected int _currentShape;
+
+        public BlockColor Color { get; set; }
         public Point Origin { get; set; }
+
+        public int CurrentShape
+        {
+            get
+            {
+                return _currentShape;
+            }
+            set
+            {
+                _currentShape = value % shapes.GetLength(0);
+            }
+        }
+
 
         public FallingBlock()
         {
             Origin = new Point();
+            Color = BlockColor.Black;
         }
 
-        public void MoveLeft()
+        public FallingBlock(Point origin, BlockColor color)
+        {
+            _currentShape = 0;
+            MakeDefaultShapes();
+            Origin = origin;
+            Color = color;
+            ImplementShape();
+        }
+
+        protected virtual void MakeDefaultShapes()
+        {
+
+        }
+
+        protected virtual void ImplementShape()
+        {
+            for (int x = 0; x < shapes.GetLength(1); x++)
+                for (int y = 0; y < shapes.GetLength(2); y++)
+                    if (shapes[CurrentShape, x, y] == 1)
+                    {
+                        List.Add(new Block(Origin + new Point(x, y), Color));
+                    }
+        }
+
+        public virtual void Transform()
+        {
+            List.Clear();
+            CurrentShape++;
+            ImplementShape();
+        }
+
+        public void MoveLeft(int offset)
         {
             foreach (Block block in List)
             {
-                block.Location.X--;
+                block.Location.X -= offset;
             }
-            Origin.X--;
+            Origin.X-= offset;
         }
 
-        public void MoveRight()
+        public void MoveRight(int offset)
         {
             foreach (Block block in List)
             {
-                block.Location.X++;
+                block.Location.X += offset;
             }
-            Origin.X++;
+            Origin.X += offset;
         }
 
         public void MoveDown(double speed)
@@ -42,11 +91,18 @@ namespace Tetris_Monogame
             Origin.Y += speed;
         }
 
-        private void Swap(ref double x, ref double y)
+        public  void Adjust(int minPosition, int maxPosition)
         {
-            double t = x;
-            x = y;
-            y = t;
+            if(RightMostBlock.Location.X>=maxPosition)
+            {
+                int offset = maxPosition - (int)RightMostBlock.Location.X;
+                MoveLeft(offset+1);                    
+            }
+            else if(LeftMostBlock.Location.X<0)
+            {
+                int offset = minPosition - (int)LeftMostBlock.Location.X;
+                MoveRight(offset);
+            }
         }
     }
 }

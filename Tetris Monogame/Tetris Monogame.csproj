@@ -55,7 +55,6 @@
     <Compile Include="FallingBlock.cs" />
     <Compile Include="FallingBlockS.cs" />
     <Compile Include="FallingBlockT.cs" />
-    <Compile Include="FallingBlockWithShape.cs" />
     <Compile Include="FallingBlockZ.cs" />
     <Compile Include="FieldTexture.cs" />
     <Compile Include="Game1.cs" />

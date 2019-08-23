@@ -8,9 +8,9 @@ namespace Tetris_Monogame
 {
     static class FallingBlockGenerator
     {
-        public static FallingBlockWithShape Generate(BlocksShape shape, Point origin)
+        public static FallingBlock Generate(BlocksShape shape, Point origin)
         {
-            FallingBlockWithShape result;
+            FallingBlock result;
 
             if (shape == BlocksShape.Random)
             {

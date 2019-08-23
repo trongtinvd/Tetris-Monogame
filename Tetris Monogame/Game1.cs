@@ -37,6 +37,8 @@ namespace Tetris_Monogame
 
             game.SpriteBatch = spriteBatch;
             game.WindowManager.Window = new Rectangle(0, 0, windowWidth, windowHeight);
+            game.WindowManager.Column = 20;
+            game.WindowManager.Row = 30;
             game.TextureManager.Field.Texture = Content.Load<Texture2D>("Field");
             game.TextureManager.AnnounceBox.Texture = Content.Load < Texture2D>("AnnounceBox");
             game.TextureManager.Block.Texture = Content.Load<Texture2D>("Blocks");

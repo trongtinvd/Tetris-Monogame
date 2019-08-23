@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tetris_Monogame
 {
-    class FallingBlockT : FallingBlockWithShape
+    class FallingBlockT : FallingBlock
     {
         public FallingBlockT(Point origin, BlockColor color) : base(origin, color)
         {
