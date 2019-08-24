@@ -12,9 +12,11 @@ namespace Tetris_Monogame
     class TetrisGame
     {
         public SpriteBatch SpriteBatch { get; set; }
+
         public TextureManager TextureManager { get; set; }
         public WindowManager WindowManager { get; set; }
         public GameplayManager GameplayManager { get; set; }
+        public InputManager InputManager { get; set; }
 
         private FallingBlock fallingBlock;
         private MergeBlocks mergeBlock;
@@ -26,9 +28,8 @@ namespace Tetris_Monogame
             TextureManager = new TextureManager();
             WindowManager = new WindowManager();
             GameplayManager = new GameplayManager();
+            InputManager = new InputManager();
 
-
-            //fallingBlock = new FallingBlockWithShape(new Point(), BlockColor.Black);
             fallingBlock = new FallingBlock();
             mergeBlock = new MergeBlocks();
         }
@@ -41,6 +42,8 @@ namespace Tetris_Monogame
 
         public void Update(KeyboardState keyboardState)
         {
+            KeyPress.Update();
+
             if (this.GameplayManager.GameStarted == true)
             {
                 //    if(mergeBlock.Collision(fallingBlock))
@@ -59,19 +62,19 @@ namespace Tetris_Monogame
                 //        }
                 //    }
 
-                if (keyboardState.IsKeyDown(Keys.Left))
+                if (this.InputManager.LeftKey.isPressed())
                 {
                     fallingBlock.MoveLeft(1);
                 }
-                else if (keyboardState.IsKeyDown(Keys.Right))
+                else if (this.InputManager.RightKey.isPressed())
                 {
                     fallingBlock.MoveRight(1);
                 }
-                else if (keyboardState.IsKeyDown(Keys.Up))
+                else if (this.InputManager.UpKey.isPressed())
                 {
                     fallingBlock.Transform();
                 }
-                else if (keyboardState.IsKeyDown(Keys.Space))
+                else if (this.InputManager.EnterKey.isPressed())
                 {
                     this.GameplayManager.GameStarted = false;
                 }
@@ -81,7 +84,7 @@ namespace Tetris_Monogame
             }
             else
             {
-                if (keyboardState.IsKeyDown(Keys.Enter))
+                if (this.InputManager.EnterKey.isPressed())
                 {
                     this.GameplayManager.GameStarted = true;
                     InitializeNewGame();

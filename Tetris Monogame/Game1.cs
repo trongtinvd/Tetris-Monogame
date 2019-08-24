@@ -43,7 +43,7 @@ namespace Tetris_Monogame
             game.TextureManager.AnnounceBox.Texture = Content.Load < Texture2D>("AnnounceBox");
             game.TextureManager.Block.Texture = Content.Load<Texture2D>("Blocks");
             game.TextureManager.Font.SpriteFont = Content.Load<SpriteFont>("ArialFont");
-            game.GameplayManager.GameSpeed = 0;            
+            game.GameplayManager.GameSpeed = 0.05;            
         }
         
         protected override void UnloadContent()

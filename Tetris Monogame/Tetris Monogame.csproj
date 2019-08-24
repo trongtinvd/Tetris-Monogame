@@ -60,7 +60,8 @@
     <Compile Include="Game1.cs" />
     <Compile Include="GameplayManager.cs" />
     <Compile Include="HorizontalAlign.cs" />
-    <Compile Include="KeyBoardController.cs" />
+    <Compile Include="InputManager.cs" />
+    <Compile Include="KeyPress.cs" />
     <Compile Include="MergeBlocks.cs" />
     <Compile Include="MyFont.cs" />
     <Compile Include="MyTexture.cs" />
