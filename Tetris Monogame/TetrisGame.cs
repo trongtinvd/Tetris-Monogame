@@ -19,7 +19,7 @@ namespace Tetris_Monogame
         public InputManager InputManager { get; set; }
 
         private FallingBlock fallingBlock;
-        private MergeBlocks mergeBlock;
+        public MergeBlocks MergeBlock { get; set; }
 
 
 
@@ -31,13 +31,13 @@ namespace Tetris_Monogame
             InputManager = new InputManager();
 
             fallingBlock = new FallingBlock();
-            mergeBlock = new MergeBlocks();
+            MergeBlock = new MergeBlocks();
         }
 
         internal void InitializeNewGame()
         {
-            fallingBlock = FallingBlockGenerator.Generate(BlocksShape.Random, new Point(8,0));
-            mergeBlock = new MergeBlocks();
+            fallingBlock = FallingBlockGenerator.Generate(BlocksShape.Random, new Point(8, 0));
+            MergeBlock = new MergeBlocks(MergeBlock.Bottom);
         }
 
         public void Update(KeyboardState keyboardState)
@@ -46,45 +46,46 @@ namespace Tetris_Monogame
 
             if (this.GameplayManager.GameStarted == true)
             {
-                //    if(mergeBlock.Collision(fallingBlock))
-                //    {
-                //        mergeBlock.Merge(fallingBlock);
-                //        fallingBlock = new FallingBlock(Blocks.Texture);
 
-                //        if(mergeBlock.CanCollapse())
-                //        {
-                //            mergeBlock.Collapse();
-                //        }
-
-                //        if(mergeBlock.ReachedLimit())
-                //        {
-                //            this.GameplayManager.GameStarted = false;
-                //        }
-                //    }
-
-                if (this.InputManager.LeftKey.isPressed())
+                if (this.InputManager.LeftKey.IsPressed() && fallingBlock.LeftSideIsFree(MergeBlock))
                 {
                     fallingBlock.MoveLeft(1);
                 }
-                else if (this.InputManager.RightKey.isPressed())
+                else if (this.InputManager.RightKey.IsPressed() && fallingBlock.RightSideIsFree(MergeBlock))
                 {
                     fallingBlock.MoveRight(1);
                 }
-                else if (this.InputManager.UpKey.isPressed())
+                else if (this.InputManager.UpKey.IsPressed())
                 {
                     fallingBlock.Transform();
                 }
-                else if (this.InputManager.EnterKey.isPressed())
+                else if (this.InputManager.EnterKey.IsPressed())
                 {
                     this.GameplayManager.GameStarted = false;
                 }
 
-                fallingBlock.Adjust(0, WindowManager.Column);
+                fallingBlock.AdjustHorizontalPosition(0, WindowManager.Column);
                 fallingBlock.MoveDown(this.GameplayManager.GameSpeed);
+
+
+                if (MergeBlock.Overlapped(fallingBlock) || fallingBlock.BelowBottom(MergeBlock.Bottom))
+                {
+                    fallingBlock.MoveBack();
+                    MergeBlock.Merge(fallingBlock);
+                    fallingBlock = FallingBlockGenerator.Generate(BlocksShape.Random, new Point(8, 0));
+
+
+                    MergeBlock.Collapse();
+
+                    if (MergeBlock.ReachedLimit())
+                    {
+                        this.GameplayManager.GameStarted = false;
+                    }
+                }
             }
             else
             {
-                if (this.InputManager.EnterKey.isPressed())
+                if (this.InputManager.EnterKey.IsPressed())
                 {
                     this.GameplayManager.GameStarted = true;
                     InitializeNewGame();
@@ -110,7 +111,7 @@ namespace Tetris_Monogame
             SpriteBatch.Draw(this.TextureManager.Field.Texture, this.WindowManager.EntireWindow(), this.TextureManager.Field.Source, Color.White);
         }
 
-        private void DrawFallingBlock( )
+        private void DrawFallingBlock()
         {
             foreach (Block block in fallingBlock.List)
             {
@@ -118,15 +119,15 @@ namespace Tetris_Monogame
             }
         }
 
-        private void DrawMergeBlock( )
+        private void DrawMergeBlock()
         {
-            foreach (Block block in mergeBlock.List)
+            foreach (Block block in MergeBlock.List)
             {
                 SpriteBatch.Draw(this.TextureManager.Block.Texture, this.WindowManager.Destination(block), this.TextureManager.Block.Source(block), Color.White);
             }
         }
 
-        private void DrawAnnounce( )
+        private void DrawAnnounce()
         {
             SpriteBatch.Draw(this.TextureManager.AnnounceBox.Texture, this.WindowManager.AnnouncementBoxDestination(), Color.White);
             SpriteBatch.DrawString(this.TextureManager.Font.SpriteFont, "Press enter", this.WindowManager.Destination("Press enter", this.TextureManager.Font, HorizontalAlign.Center), Color.Black);

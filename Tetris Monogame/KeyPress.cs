@@ -24,7 +24,7 @@ namespace Tetris_Monogame
             state = Keyboard.GetState();
         }
 
-        public bool isPressed()
+        public bool IsPressed()
         {
             if (state.IsKeyDown(key))
             {

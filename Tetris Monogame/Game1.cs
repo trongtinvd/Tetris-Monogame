@@ -36,6 +36,7 @@ namespace Tetris_Monogame
             game = new TetrisGame();
 
             game.SpriteBatch = spriteBatch;
+            game.MergeBlock.Bottom = 29;
             game.WindowManager.Window = new Rectangle(0, 0, windowWidth, windowHeight);
             game.WindowManager.Column = 20;
             game.WindowManager.Row = 30;
@@ -43,7 +44,7 @@ namespace Tetris_Monogame
             game.TextureManager.AnnounceBox.Texture = Content.Load < Texture2D>("AnnounceBox");
             game.TextureManager.Block.Texture = Content.Load<Texture2D>("Blocks");
             game.TextureManager.Font.SpriteFont = Content.Load<SpriteFont>("ArialFont");
-            game.GameplayManager.GameSpeed = 0.05;            
+            game.GameplayManager.GameSpeed = 0.1;            
         }
         
         protected override void UnloadContent()

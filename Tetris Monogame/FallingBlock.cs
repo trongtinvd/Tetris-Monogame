@@ -42,11 +42,6 @@ namespace Tetris_Monogame
             ImplementShape();
         }
 
-        protected virtual void MakeDefaultShapes()
-        {
-
-        }
-
         protected virtual void ImplementShape()
         {
             for (int x = 0; x < shapes.GetLength(1); x++)
@@ -70,7 +65,7 @@ namespace Tetris_Monogame
             {
                 block.Location.X -= offset;
             }
-            Origin.X-= offset;
+            Origin.X -= offset;
         }
 
         public void MoveRight(int offset)
@@ -91,18 +86,67 @@ namespace Tetris_Monogame
             Origin.Y += speed;
         }
 
-        public  void Adjust(int minPosition, int maxPosition)
+        internal void MoveBack()
         {
-            if(RightMostBlock.Location.X>=maxPosition)
+            foreach(Block block in List)
+            {
+                block.Location.Y -= 1;
+            }
+            Origin.Y -= 1;
+        }
+
+        internal bool BelowBottom(int bottom)
+        {
+            foreach (Block block in List)
+            {
+                if ((int)block.Location.Y > bottom)
+                    return true;
+            }
+            return false;
+        }
+
+        public void AdjustHorizontalPosition(int minPosition, int maxPosition)
+        {
+            if (RightMostBlock.Location.X >= maxPosition)
             {
                 int offset = maxPosition - (int)RightMostBlock.Location.X;
-                MoveLeft(offset+1);                    
+                MoveLeft(offset + 1);
             }
-            else if(LeftMostBlock.Location.X<0)
+            else if (LeftMostBlock.Location.X < 0)
             {
                 int offset = minPosition - (int)LeftMostBlock.Location.X;
                 MoveRight(offset);
             }
+        }
+
+        public bool LeftSideIsFree(MergeBlocks mergeBlocks)
+        {
+            foreach (Block block1 in this.List)
+            {
+                foreach (Block block2 in mergeBlocks.List)
+                {
+                    if ((int)block2.Location.X == (int)block1.Location.X - 1 && (int)block2.Location.Y == (int)block1.Location.Y)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        public bool RightSideIsFree(MergeBlocks mergeBlocks)
+        {
+            foreach (Block block1 in this.List)
+            {
+                foreach (Block block2 in mergeBlocks.List)
+                {
+                    if ((int)block2.Location.X == (int)block1.Location.X + 1 && (int)block2.Location.Y == (int)block1.Location.Y)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
     }
 }

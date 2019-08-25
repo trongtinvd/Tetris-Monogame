@@ -8,7 +8,7 @@ namespace Tetris_Monogame
 {
     class BlockCollection
     {
-        public HashSet<Block> List { get; set; }
+        public List<Block> List { get; set; }
         public Block LeftMostBlock
         {
             get
@@ -42,7 +42,7 @@ namespace Tetris_Monogame
 
         public BlockCollection()
         {
-            List = new HashSet<Block>();
+            List = new List<Block>();
         }
 
 
