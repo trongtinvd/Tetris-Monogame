@@ -10,6 +10,7 @@ namespace Tetris_Monogame
     class InputManager
     {
         public KeyPress EnterKey { get; set; }
+        public KeyPress SpaceKey { get; set; }
         public KeyPress RightKey { get; set; }
         public KeyPress LeftKey { get; set; }
         public KeyPress UpKey { get; set; }
@@ -17,6 +18,7 @@ namespace Tetris_Monogame
         public InputManager()
         {
             EnterKey = new KeyPress(Keys.Enter);
+            SpaceKey = new KeyPress(Keys.Space);
             RightKey = new KeyPress(Keys.Right);
             LeftKey = new KeyPress(Keys.Left);
             UpKey = new KeyPress(Keys.Up);

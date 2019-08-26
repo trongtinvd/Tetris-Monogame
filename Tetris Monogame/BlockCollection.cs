@@ -9,18 +9,13 @@ namespace Tetris_Monogame
     class BlockCollection
     {
         public List<Block> List { get; set; }
+
         public Block LeftMostBlock
         {
             get
             {
-                Block result = List.ToArray<Block>()[0];
-
-                foreach (Block block in List)
-                {
-                    if (block.Location.X < result.Location.X)
-                        result = block;
-                }
-
+                double min = List.Min(b => b.Location.X);
+                Block result = List.Where(b => b.Location.X == min).First();
                 return result;
             }
         }
@@ -28,14 +23,8 @@ namespace Tetris_Monogame
         {
             get
             {
-                Block result = List.ToArray<Block>()[0];
-
-                foreach (Block block in List)
-                {
-                    if (block.Location.X > result.Location.X)
-                        result = block;
-                }
-
+                double max = List.Max(b => b.Location.X);
+                Block result = List.Where(b => b.Location.X == max).First();
                 return result;
             }
         }

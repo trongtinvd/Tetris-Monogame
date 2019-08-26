@@ -12,11 +12,9 @@ namespace Tetris_Monogame
     {
         public Texture2D Texture { get; set; }
 
-
         public MyTexture()
         {
 
         }
-
     }
 }

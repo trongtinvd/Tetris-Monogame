@@ -8,18 +8,11 @@ namespace Tetris_Monogame
 {
     class MergeBlocks : BlockCollection
     {
-        public int Bottom { get; internal set; }
-
         public MergeBlocks()
         {
 
         }
-
-        public MergeBlocks(int bottom)
-        {
-            Bottom = bottom;
-        }
-
+        
         internal bool Overlapped(FallingBlock fallingBlock)
         {
             foreach (Block block1 in this.List)
@@ -44,11 +37,11 @@ namespace Tetris_Monogame
         }
 
 
-        internal void Collapse()
+        internal void Collapse(int fill)
         {
             List<int> filledRow = (from block in List
                                    group (int)block.Location.X by (int)block.Location.Y into eachRow
-                                   where eachRow.Count() >= 20
+                                   where eachRow.Count() >= fill
                                    select (int)eachRow.Key).ToList();
 
             filledRow.Sort();

@@ -10,8 +10,6 @@ namespace Tetris_Monogame
     class WindowManager
     {
         public Rectangle Window { get; set; }
-        public int Row { get; set; }
-        public int Column { get; set; }
 
         public WindowManager()
         {
@@ -23,10 +21,10 @@ namespace Tetris_Monogame
             return Window;
         }
 
-        public Rectangle Destination(Block block)
+        public Rectangle Destination(Block block, GameplayManager gameplayManager)
         {
-            int blockWidth = Window.Width / Column;
-            int blockHeight = Window.Height / Row;
+            int blockWidth = Window.Width / gameplayManager.Columns;
+            int blockHeight = Window.Height / gameplayManager.Rows;
             
             Rectangle result = new Rectangle((int)block.Location.X * blockWidth, (int)block.Location.Y * blockHeight, blockWidth, blockHeight);
 

@@ -15,8 +15,6 @@ namespace Tetris_Monogame
         public MyFont()
         {
 
-        }
-
-        
+        }        
     }
 }

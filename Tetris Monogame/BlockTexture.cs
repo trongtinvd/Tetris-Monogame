@@ -28,13 +28,7 @@ namespace Tetris_Monogame
                 color = (BlockColor)r.Next(0, numberOfColor);
             }
 
-            Rectangle result = new Rectangle();
-
-            result.X = (int)color * 8;
-            result.Y = 0;
-            result.Width = 8;
-            result.Height = 8;
-
+            Rectangle result = new Rectangle((int)color * 8, 0, 8, 8);
             return result;
         }
     }

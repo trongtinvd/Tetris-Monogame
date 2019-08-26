@@ -36,8 +36,8 @@ namespace Tetris_Monogame
 
         internal void InitializeNewGame()
         {
-            fallingBlock = FallingBlockGenerator.Generate(BlocksShape.Random, new Point(8, 0));
-            MergeBlock = new MergeBlocks(MergeBlock.Bottom);
+            fallingBlock = FallingBlockGenerator.Generate(BlocksShape.Random, new Point(this.GameplayManager.Columns/2-1, -3));
+            MergeBlock = new MergeBlocks(/*MergeBlock.Bottom*/);
         }
 
         public void Update(KeyboardState keyboardState)
@@ -64,18 +64,18 @@ namespace Tetris_Monogame
                     this.GameplayManager.GameStarted = false;
                 }
 
-                fallingBlock.AdjustHorizontalPosition(0, WindowManager.Column);
+                fallingBlock.AdjustHorizontalPosition(0, this.GameplayManager.Columns);
                 fallingBlock.MoveDown(this.GameplayManager.GameSpeed);
 
 
-                if (MergeBlock.Overlapped(fallingBlock) || fallingBlock.BelowBottom(MergeBlock.Bottom))
+                if (MergeBlock.Overlapped(fallingBlock) || fallingBlock.BelowBottom(GameplayManager.Rows-1))
                 {
                     fallingBlock.MoveBack();
                     MergeBlock.Merge(fallingBlock);
-                    fallingBlock = FallingBlockGenerator.Generate(BlocksShape.Random, new Point(8, 0));
+                    fallingBlock = FallingBlockGenerator.Generate(BlocksShape.Random, new Point(this.GameplayManager.Columns/2-1, -3));
 
 
-                    MergeBlock.Collapse();
+                    MergeBlock.Collapse(this.GameplayManager.Columns);
 
                     if (MergeBlock.ReachedLimit())
                     {
@@ -115,7 +115,7 @@ namespace Tetris_Monogame
         {
             foreach (Block block in fallingBlock.List)
             {
-                SpriteBatch.Draw(this.TextureManager.Block.Texture, this.WindowManager.Destination(block), this.TextureManager.Block.Source(block), Color.White);
+                SpriteBatch.Draw(this.TextureManager.Block.Texture, this.WindowManager.Destination(block, this.GameplayManager), this.TextureManager.Block.Source(block), Color.White);
             }
         }
 
@@ -123,7 +123,7 @@ namespace Tetris_Monogame
         {
             foreach (Block block in MergeBlock.List)
             {
-                SpriteBatch.Draw(this.TextureManager.Block.Texture, this.WindowManager.Destination(block), this.TextureManager.Block.Source(block), Color.White);
+                SpriteBatch.Draw(this.TextureManager.Block.Texture, this.WindowManager.Destination(block, this.GameplayManager), this.TextureManager.Block.Source(block), Color.White);
             }
         }
 

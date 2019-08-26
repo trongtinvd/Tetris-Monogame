@@ -42,6 +42,11 @@ namespace Tetris_Monogame
             ImplementShape();
         }
 
+        protected virtual void MakeDefaultShapes()
+        {
+            //
+        }
+
         protected virtual void ImplementShape()
         {
             for (int x = 0; x < shapes.GetLength(1); x++)
@@ -88,7 +93,7 @@ namespace Tetris_Monogame
 
         internal void MoveBack()
         {
-            foreach(Block block in List)
+            foreach (Block block in List)
             {
                 block.Location.Y -= 1;
             }
@@ -112,7 +117,7 @@ namespace Tetris_Monogame
                 int offset = maxPosition - (int)RightMostBlock.Location.X;
                 MoveLeft(offset + 1);
             }
-            else if (LeftMostBlock.Location.X < 0)
+            else if (LeftMostBlock.Location.X <= 0)
             {
                 int offset = minPosition - (int)LeftMostBlock.Location.X;
                 MoveRight(offset);
@@ -121,32 +126,26 @@ namespace Tetris_Monogame
 
         public bool LeftSideIsFree(MergeBlocks mergeBlocks)
         {
-            foreach (Block block1 in this.List)
-            {
-                foreach (Block block2 in mergeBlocks.List)
-                {
-                    if ((int)block2.Location.X == (int)block1.Location.X - 1 && (int)block2.Location.Y == (int)block1.Location.Y)
-                    {
-                        return false;
-                    }
-                }
-            }
-            return true;
+            var obstaclesInTheLeftSide = from block1 in List
+                                         join block2 in mergeBlocks.List
+                                         on (int)block1.Location.Y equals (int)block2.Location.Y
+                                         where (int)(block1.Location.X - 1) == (int)block2.Location.X
+                                         select block2;
+
+            return obstaclesInTheLeftSide.Count() == 0;
+
+
         }
 
         public bool RightSideIsFree(MergeBlocks mergeBlocks)
         {
-            foreach (Block block1 in this.List)
-            {
-                foreach (Block block2 in mergeBlocks.List)
-                {
-                    if ((int)block2.Location.X == (int)block1.Location.X + 1 && (int)block2.Location.Y == (int)block1.Location.Y)
-                    {
-                        return false;
-                    }
-                }
-            }
-            return true;
+            var obstaclesInTheRightSide = from block1 in List
+                                          join block2 in mergeBlocks.List
+                                          on (int)block1.Location.Y equals (int)block2.Location.Y
+                                          where (int)(block1.Location.X + 1) == (int)block2.Location.X
+                                          select block2;
+
+            return obstaclesInTheRightSide.Count() == 0;
         }
     }
 }
