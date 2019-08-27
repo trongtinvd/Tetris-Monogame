@@ -36,7 +36,9 @@ namespace Tetris_Monogame
 
         internal void InitializeNewGame()
         {
-            fallingBlock = FallingBlockGenerator.Generate(BlocksShape.Random, new Point(this.GameplayManager.Columns/2-1, -3));
+            fallingBlock = FallingBlockGenerator.Generate(RandomEnumGenerator.Generate<BlocksShape>(), new Point(this.GameplayManager.Columns / 2 - 1, -3));
+            // The following line is use for debug.
+            //fallingBlock = new FallingBlockI(new Point(0, 0), BlockColor.Black); 
             MergeBlock = new MergeBlocks();
         }
 
@@ -50,7 +52,8 @@ namespace Tetris_Monogame
                 {
                     this.GameplayManager.GamePaused = true;
 
-                } else if (this.InputManager.LeftKey.IsPressed() && fallingBlock.LeftSideIsFree(MergeBlock))
+                }
+                else if (this.InputManager.LeftKey.IsPressed() && fallingBlock.LeftSideIsFree(MergeBlock))
                 {
                     fallingBlock.MoveLeft(1);
                 }
@@ -75,8 +78,9 @@ namespace Tetris_Monogame
                 {
                     fallingBlock.MoveBack();
                     MergeBlock.Merge(fallingBlock);
-                    fallingBlock = FallingBlockGenerator.Generate(BlocksShape.Random, new Point(this.GameplayManager.Columns / 2 - 1, -3));
-
+                    fallingBlock = FallingBlockGenerator.Generate(RandomEnumGenerator.Generate<BlocksShape>(), new Point(this.GameplayManager.Columns / 2 - 1, -3));
+                    // The following line is use for debug.
+                    //fallingBlock = new FallingBlockI(new Point(0, 0), BlockColor.Black); 
 
                     MergeBlock.Collapse(this.GameplayManager.Columns);
 
@@ -85,7 +89,8 @@ namespace Tetris_Monogame
                         this.GameplayManager.GameStarted = false;
                     }
                 }
-            } else if (this.GameplayManager.GameStarted == true&&this.GameplayManager.GamePaused==true)
+            }
+            else if (this.GameplayManager.GameStarted == true && this.GameplayManager.GamePaused == true)
             {
                 if (this.InputManager.SpaceKey.IsPressed())
                 {

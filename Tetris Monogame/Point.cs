@@ -8,8 +8,8 @@ namespace Tetris_Monogame
 {
     class Point
     {
-        public double X;
-        public double Y;
+        public decimal X;
+        public decimal Y;
 
         public Point()
         {
@@ -17,7 +17,7 @@ namespace Tetris_Monogame
             Y = 0;
         }
 
-        public Point(double x, double y)
+        public Point(decimal x, decimal y)
         {
             X = x;
             Y = y;

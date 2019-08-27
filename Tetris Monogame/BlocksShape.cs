@@ -15,6 +15,5 @@ namespace Tetris_Monogame
         T,
         O,
         I,
-        Random,
     }
 }

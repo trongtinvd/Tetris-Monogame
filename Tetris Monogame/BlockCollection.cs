@@ -14,7 +14,7 @@ namespace Tetris_Monogame
         {
             get
             {
-                double min = List.Min(b => b.Location.X);
+                decimal min = List.Min(b => b.Location.X);
                 Block result = List.Where(b => b.Location.X == min).First();
                 return result;
             }
@@ -23,7 +23,7 @@ namespace Tetris_Monogame
         {
             get
             {
-                double max = List.Max(b => b.Location.X);
+                decimal max = List.Max(b => b.Location.X);
                 Block result = List.Where(b => b.Location.X == max).First();
                 return result;
             }

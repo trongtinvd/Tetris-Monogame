@@ -12,13 +12,6 @@ namespace Tetris_Monogame
         {
             FallingBlock result;
 
-            if (shape == BlocksShape.Random)
-            {
-                var availbleShapes = Enum.GetValues(typeof(BlocksShape)).Length - 1;
-                int randomNumber = new Random().Next(0, availbleShapes);
-                shape = (BlocksShape)randomNumber;
-            }
-
             switch (shape)
             {
                 case BlocksShape.I:

@@ -82,7 +82,7 @@ namespace Tetris_Monogame
             Origin.X += offset;
         }
 
-        public void MoveDown(double speed)
+        public void MoveDown(decimal speed)
         {
             foreach (Block block in List)
             {

@@ -68,6 +68,7 @@
     <Compile Include="Point.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RandomEnumGenerator.cs" />
     <Compile Include="TetrisGame.cs" />
     <Compile Include="TextureManager.cs" />
     <Compile Include="WindowManager.cs" />

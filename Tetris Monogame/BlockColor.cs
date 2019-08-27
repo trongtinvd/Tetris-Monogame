@@ -17,6 +17,5 @@ namespace Tetris_Monogame
         Green,
         Black,
         White,
-        Random,
     }
 }

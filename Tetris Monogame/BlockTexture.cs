@@ -13,22 +13,12 @@ namespace Tetris_Monogame
 
         public BlockTexture()
         {
-            
-        }
 
+        }
 
         public Rectangle Source(Block block)
         {
-            BlockColor color = block.Color;
-
-            if (color == BlockColor.Random)
-            {
-                Random r = new Random();
-                int numberOfColor = Enum.GetNames(typeof(BlockColor)).Length - 1;
-                color = (BlockColor)r.Next(0, numberOfColor);
-            }
-
-            Rectangle result = new Rectangle((int)color * 8, 0, 8, 8);
+            Rectangle result = new Rectangle((int)block.Color * 8, 0, 8, 8);
             return result;
         }
     }

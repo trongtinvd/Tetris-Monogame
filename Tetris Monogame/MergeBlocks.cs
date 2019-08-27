@@ -45,7 +45,9 @@ namespace Tetris_Monogame
                                    select (int)eachRow.Key).ToList();
 
             filledRow.Sort();
+            // remove row that are filled
             List.RemoveAll(p => filledRow.Any(y => y == (int)p.Location.Y));
+            // move all block above them down 1 unit
             foreach (int i in filledRow)
             {
                 List.Where(p => (int)p.Location.Y < i).ToList().ForEach(p => p.Location.Y++);
